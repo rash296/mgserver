@@ -14,8 +14,8 @@
           </div><!-- /.head-overlay -->
           <div class="slider-text">
             <div class="slide-inner">
-              <h2 class="slider-title" data-animation="wow animated bounceInDown">Welcome to <span>MG EDUCATION</span></h2>
-              <p class="slide-description">Your child's second parent</p>
+              <h2 class="slider-title" data-animation="wow animated bounceInDown">Welcome to <span>MG Coaching Center</span></h2>
+              <p class="slide-description">Where Knowledge Begins</p>
               <div class="slide-btn-container">
                 <a class="btn" href="http://google.com">View</a>
               </div><!-- /.slide-btn-container -->
@@ -33,7 +33,7 @@
           <div class="slider-text">
             <div class="slide-inner">
               <h2 class="slider-title">A<span>JOURNEY</span> to knowledge</h2>
-              <p class="slide-description">building a child of value</p>
+              <p class="slide-description">Building a Child of Value</p>
               <div class="slide-btn-container">
                 <a class="btn" href="http://google.com">View</a>
               </div><!-- /.slide-btn-container -->
@@ -56,15 +56,15 @@
     <!-- About Us Section -->
 
   <section id="about" class="about">
-    <div class="about-top">
+    <div class="about-top" id="aboutus">
       <div class="section-padding">
         <div class="container">
           <div class="row">
             <div class="col-md-7">
               <div class="know-about-us wow animated fadeInLeft" data-wow-delay=".5s">
-                <h2 class="section-title"><span>We</span> are MG Education </h2><!-- /.section-title -->
-                <p class="description">
-                  Right Coaching, innovative pedagogy, and unparalleled motivation is what constitutes Renaissance – a unique competitive exam coaching institute, delivering path breaking results year after year.<br/><br/>
+                <h2 class="section-title"><span>We</span> are MG Coaching Center </h2><!-- /.section-title -->
+                <p >
+                  Right Coaching, innovative pedagogy, and unparalleled motivation is what constitutes MG Coaching Center – a unique competitive exam coaching institute, delivering path breaking results year after year.<br/><br/>
                   MG coaching Institue was started in 1994 by M.G. Wilson. Since the past 20 years we have created a niche for ourselves in the feild of Mathematical Coaching in Vadodara. We believe
                   in your child's potential and strive to bring out the best in them. 
                 </p><!-- /.description -->
@@ -180,16 +180,31 @@
     <!-- WHY USWORKWITH    -->
 
     <div class="about-bottom">
+      <div class="container">
       <div class="section-padding">
         <div class="col-sm-6">
-          <div class="tab-image wow animated fadeInLeft" data-wow-delay=".5s">
+
+  <h3>News</h3>
+    <hr>
+  {% if news %}
+  <marquee direction="up">
+
+  <ul>
+    {% for i in news %}
+    <li>{{i.message}}</li><br/>
+    {% endfor %}
+    </ul>
+    </marquee>
+
+  {% endif %}
+  <!--  <div class="tab-image wow animated fadeInLeft" id="first" data-wow-delay=".5s">
             <img src="{% static 'images/work.jpg' %}" alt="Tab Image">
           </div><!-- /.tab-image -->
         </div>
         <div class="col-sm-6">
           <div class="about-work wow animated fadeInRight" data-wow-delay=".5s">
             <h2 class="section-title"><span>Why</span> Study With Us</h2><!-- /.section-title -->
-            <p class="description">
+            <p >
               One part of the ether is precisely like any other part everywhere and always, and there are no such distinctions in it as correspond with the elemental forms of matter.
 
              <br/>* 6 hours of intensive classroom training per week by subject experts (2 hours every alternate day)
@@ -218,6 +233,7 @@
             </p>
           </div><!-- /.about-work -->
         </div>
+        </div>
       </div><!-- /.section-padding -->
     </div><!-- /.about-bottom -->
   </section><!-- /#about -->
@@ -225,7 +241,7 @@
 
 
    <section id="main-slider" class="main-slider text-center">
-    <div class="head-overlay">
+    <div class="head-overlay" id="achievement">
       <ul class="bxslider">
          <div class="col-md-3 col-sm-6">
         <li>
@@ -256,9 +272,10 @@
     </div><!-- /.head-overlay -->
   </section><!-- /#main-slider --> 
 
-<section id="about" class="about">
+<div class="container" id="contactus">
+<section id="about" id="first" class="about">
     <div class="section-padding">
-      <div class="container">
+      
           <h2 class="section-title"><span>Contact</span> Us </h2>
           <div class="row">
 
@@ -274,9 +291,12 @@
             
             </div>
 
-        </div>
+        
     </div>
 </section>
+<div class="row" id="first">
+</div>
+</div>
   
 
   <!-- Quote Section -->

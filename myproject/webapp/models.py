@@ -17,6 +17,7 @@ class TestRecord(models.Model):
 	stud_name=models.CharField(max_length=30,null=True)
 	stud_score=models.IntegerField(null=True)
 	test_no=models.IntegerField(null=True)
+	stud_batch=models.IntegerField(null=True)
 	test_avg=models.IntegerField(null=True)
 
 	#class Meta:

@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^parent_data/$', 'webapp.views.parent_data'),
     url(r'^chart/$', 'webapp.views.chart', name='chart'),
     url(r'^announcements/$', 'webapp.views.announcements', name='announcements'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
     
 
     

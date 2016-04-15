@@ -9,16 +9,11 @@
     <div class="container">
 
     <p>Welcome {{ user.first_name }} !!!</p>
-    <p>Welcome {{ user.groups.all.0.name }} !!!</p>
-    <a href="/logout/">Logout</a>
+    <p>ID : {{ user.username }}</p>
+    <p>Profile : {{ user.groups.all.0.name }} </p>
+   <p> <a href="/logout/">Logout</a></p>
+     <a href="/accounts/password/change">Change Password</a>
     <p> </p>
-    <a href="/logged_in/">Check group</a>
-    
-    {% ifequal user.groups.all.0.name 'Student' %}
-    <p>This is a Student</p>
-    {% else %}
-    <p>This is a parent </p>
-    {% endifequal %}
     
     </div>
 

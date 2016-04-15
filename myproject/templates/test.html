@@ -14,7 +14,16 @@
               <form action="/test/" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
-            
+            <div class="row">
+              <div class="col-md-6 ">
+                <p>Batch : </p>
+              </div>
+            <div class="col-md-6 ">
+              
+                {{ form.batch.errors }}
+               {{ form.batch }}
+               </div>
+            </div>
             <div class="row">
               <div class="col-md-6 ">
                 <p>Test no : </p>
@@ -22,7 +31,7 @@
             <div class="col-md-6 ">
               
                 {{ form.test_no.errors }}
-               {{ form.test_no}}
+               {{ form.test_no }}
                </div>
             </div>
             <br/>

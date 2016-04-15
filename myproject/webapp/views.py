@@ -30,7 +30,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login
 
-
+#global variables
+global subject
+global subject1
 
 # Handles Registration page
 
@@ -99,15 +101,28 @@ def announcements(request):
 	schedule=Schedules.objects.all().order_by('date')
 	#testset=TestRecord.objects.all()
 	#max_test=TestRecord.objects.aggregate(Max('test_no'))
-	max_test=TestRecord.objects.all().order_by('-test_no')[0]
-	number=max_test.test_no
-	top_ten=TestRecord.objects.all().filter(test_no=number).order_by('-stud_score')
+	batch1=13
+	top_ten2=0
+	if TestRecord.objects.all().filter(stud_batch=batch1).exists():
+	
+		max_test1=TestRecord.objects.all().filter(stud_batch=batch1).order_by('-test_no')[0]
+		number1=max_test1.test_no
+		top_ten1=TestRecord.objects.all().filter(test_no=number1).order_by('-stud_score')[:10]
+
+	batch2=14
+	top_ten2=0
+	if TestRecord.objects.all().filter(stud_batch=batch2).exists():
+		max_test2=TestRecord.objects.all().filter(stud_batch=batch2).order_by('-test_no')[0]
+		number2=max_test2.test_no
+		top_ten2=TestRecord.objects.all().filter(test_no=number2).order_by('-stud_score')[:10]
 	news=News.objects.all().order_by('message_ID')
 
 	context={
 		'schedule':schedule,
-		'max_test':max_test,
-		'top_ten':top_ten,
+		'max_test1':max_test1,
+		#'max_test2':max_test1,
+		'top_ten1':top_ten1,
+		'top_ten2':top_ten2,
 		'news':news,
 
 	}
@@ -149,7 +164,7 @@ def notify(request):
 	form=notifyForm(request.POST or None)
 	if form.is_valid():
 		notification_message=form.cleaned_data.get("Notification_message")
-		subject='Notification from M.G coaching insititute'
+		subject1='Notification from M.G coaching insititute'
 		#settings.EMAIL_HOST_USER is defined in settings.py
 
 		from_email=settings.EMAIL_HOST_USER
@@ -158,7 +173,7 @@ def notify(request):
        
         		
         		
-		send_mail(subject,
+		send_mail(subject1,
 			notification_message,
 			from_email,
 			to_email,
@@ -249,7 +264,8 @@ def profile(request):
 
 
 def home(request):
-	return render(request,'home.html',{})
+	news=News.objects.all().order_by('message_ID')
+	return render(request,'home.html',{'news':news})
 
 
 def about(request):
@@ -295,10 +311,10 @@ def test(request):
 		if form.is_valid():
 			newdoc = Test(testsheet= request.FILES['testsheet'])
 			newdoc.save()
-			handle_uploaded_file_test(request.FILES['testsheet'],form.cleaned_data.get('test_no'),form.cleaned_data.get('test_avg'))
+			handle_uploaded_file_test(request.FILES['testsheet'],form.cleaned_data.get('batch'),form.cleaned_data.get('test_no'),form.cleaned_data.get('test_avg'))
 
 
-			return HttpResponseRedirect(reverse('webapp.views.home'))
+			return HttpResponseRedirect(reverse('webapp.views.loginhome'))
 	else:
 		form = TestForm() # A empty, unbound form
 
@@ -309,7 +325,7 @@ def test(request):
 
 	
 
-def handle_uploaded_file_test(f,no,avg):
+def handle_uploaded_file_test(f,batch,no,avg):
 	#files=open(f.url, 'r')
 	for line in f:
 		line=line.split(',')
@@ -322,6 +338,7 @@ def handle_uploaded_file_test(f,no,avg):
 		tmp.stud_score=line[2]
 		#tmp.test_no=line[3]
 		tmp.test_no=no
+		tmp.stud_batch=batch
 		#tmp.test_avg=line[4]
 		tmp.test_avg=avg
 		tmp.save()
@@ -337,7 +354,7 @@ def parent_data(request):
 			newdoc.save()
 			handle_uploaded_file_parent(request.FILES['parentsheet'])
 
-			return HttpResponseRedirect(reverse('webapp.views.home'))
+			return HttpResponseRedirect(reverse('webapp.views.loginhome'))
 	else:
 		form = StudentForm() # A empty, unbound form
 
@@ -370,7 +387,7 @@ def student_data(request):
 			newdoc.save()
 			handle_uploaded_file_student(request.FILES['studentsheet'])
 
-			return HttpResponseRedirect(reverse('webapp.views.home'))
+			return HttpResponseRedirect(reverse('webapp.views.loginhome'))
 	else:
 		form = StudentForm() # A empty, unbound form
 

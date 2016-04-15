@@ -95,6 +95,7 @@ class TestForm(forms.Form):
 	#	fields=['test_no','test_avg','testsheet']
 	
 	test_no=forms.IntegerField()
+	batch=forms.IntegerField()
 	test_avg=forms.IntegerField()
 	testsheet=forms.FileField(
 		#widget=forms.ClearableFileInputButton(attrs={'class' : 'waves-effect waves-light btn white-text'}),
